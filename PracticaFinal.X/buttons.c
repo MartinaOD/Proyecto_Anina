@@ -1,3 +1,6 @@
+#include <xc.h>
+#include "buttons.h"
+
 /* PARA LA SESIÓN 1: buttons.c */
 
 #define PUL_ROJO 0 // RA0
@@ -17,7 +20,11 @@ void initButtons(){
 }
 
 int act_rojo, act_verde, act_azul, act_amarillo, act_start;
-int ant_rojo, ant_verde, ant_azul, ant_amarillo, ant_start = 1;
+int ant_rojo = 1;
+int ant_verde = 1;
+int ant_azul = 1;
+int ant_amarillo = 1;
+int ant_start = 1;
 
 
 // Dentro del while, se debe llamar a ButtonsPressed() y guardarla en button

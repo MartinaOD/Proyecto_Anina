@@ -49,19 +49,19 @@ void Buzzer_on(led_color_t color)
 
     switch (color)
     {
-        case LED_RED:
+        case RED:
             frequency = 500;
             break;
 
-        case LED_GREEN:
+        case GREEN:
             frequency = 800;
             break;
 
-        case LED_BLUE:
+        case BLUE:
             frequency = 1200;
             break;
 
-        case LED_YELLOW:
+        case YELLOW:
             frequency = 1600;
             break;
 

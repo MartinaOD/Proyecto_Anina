@@ -1,46 +1,39 @@
-/* 
- * File:   UART1.h
- * Author: DEAC
- *
- * Created on 2 de marzo de 2018, 11:39
+#ifndef UART_H
+#define UART_H
+
+/* ===================== INCLUDES ===================== */
+#include <xc.h>
+#include <stdint.h>
+
+/* ===================== DEFINES ===================== */
+#define TAM_COLA 100
+#define PIN_RX 13
+#define PIN_TX 7
+#define FPB 5000000     // Frecuencia del bus periférico (Hz)
+
+/* ===================== PROTOTIPOS ===================== */
+
+/**
+ * Inicializa la UART1 con el baudrate indicado
+ * @param baudios Velocidad en baudios (ej: 9600, 115200)
  */
-
-#ifndef UART1_H
-#define	UART1_H
-
-#ifdef	__cplusplus
-extern "C" {
-#endif
-
 void InicializarUART1(int baudios);
 
- /**
- * Extrae un carácter de la cola de recepción y lo devuelve. Si la cola
- * está vacía devuelve un \0.
- *
- * @return  caracter extraído de la cola
+/**
+ * Envía una cadena de caracteres por UART (no bloqueante)
+ * @param s Cadena terminada en '\0'
+ */
+void putsUART(char s[]);
+
+/**
+ * Lee un carácter recibido por UART
+ * @return Carácter recibido o '\0' si no hay datos
  */
 char getcUART(void);
 
-  /**
- * Envía un carácter a la UART1 y habilita el transmisor para que se envíe
- * 
- * @param c carácter a enviar
+/**
+ * Rutina de servicio de interrupción de UART1
  */
-void putcUART(char c);
-  
-  /**
- * Envia una cadena de caracteres a la cola de transmisión y habilita
- * el transmisor para que se envíe
- * 
- * @param s cadena de caracteres a enviar
- */
-void putsUART(char *ps);
+void InterrupcionUART1(void);
 
-
-#ifdef	__cplusplus
-}
-#endif
-
-#endif	/* UART1_H */
-
+#endif /* UART_H */

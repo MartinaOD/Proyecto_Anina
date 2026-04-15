@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <project>                                  
-  <executable name="dist/default/debug/PracticaBase.X.debug.elf">                 
+  <executable name="dist/default/debug/PracticaFinal.X.debug.elf">                 
     <memory name="program">                 
       <units>bytes</units>                 
       <length>66704</length>                 
-      <used>1868</used>                     
-      <free>64836</free>                     
+      <used>1940</used>                     
+      <free>64764</free>                     
     </memory>                              
     <memory name="data">              
       <units>bytes</units>                 
       <length>16896</length>                 
-      <used>2048</used>                     
-      <free>14848</free>                     
+      <used>1024</used>                     
+      <free>15872</free>                     
     </memory>                              
   </executable>                            
 </project>                                 

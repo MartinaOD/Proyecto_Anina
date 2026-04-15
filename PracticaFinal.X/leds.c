@@ -24,7 +24,7 @@ void initLEDs(void) {
 /* =========================
  * Control individual ON
  * ========================= */
-void LED_on(led_color_t color) {
+void LED_off(led_color_t color) {
     switch (color) {
         case RED:
             LATC |= (1 << PIN_LEDRED);
@@ -50,7 +50,7 @@ void LED_on(led_color_t color) {
 /* =========================
  * Control individual OFF
  * ========================= */
-void LED_off(led_color_t color) {
+void LED_on(led_color_t color) {
     switch (color) {
         case RED:
             LATC &= ~(1 << PIN_LEDRED);
@@ -76,7 +76,7 @@ void LED_off(led_color_t color) {
 /* =========================
  * Encender todos los LEDs
  * ========================= */
-void LED_all_on(void) {
+void LED_all_off(void) {
     LATC |= (1 << PIN_LEDRED);
     LATC |= (1 << PIN_LEDGREEN);
     LATC |= (1 << PIN_LEDBLUE);
@@ -86,7 +86,7 @@ void LED_all_on(void) {
 /* =========================
  * Apagar todos los LEDs
  * ========================= */
-void LED_all_off(void) {
+void LED_all_on(void) {
     LATC &= ~(1 << PIN_LEDRED);
     LATC &= ~(1 << PIN_LEDGREEN);
     LATC &= ~(1 << PIN_LEDBLUE);

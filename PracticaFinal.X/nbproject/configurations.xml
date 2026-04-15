@@ -11,6 +11,7 @@
       <itemPath>buzzer.h</itemPath>
       <itemPath>game.h</itemPath>
       <itemPath>buttons.h</itemPath>
+      <itemPath>timers.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -32,6 +33,12 @@
       <itemPath>fsm.c</itemPath>
       <itemPath>game.c</itemPath>
       <itemPath>buttons.c</itemPath>
+      <itemPath>main_ledspuls_prueba.c</itemPath>
+      <itemPath>main_puls_prueba.c</itemPath>
+      <itemPath>main_leds_prueba.c</itemPath>
+      <itemPath>timers.c</itemPath>
+      <itemPath>main_prueba_fsm_uart_game.c</itemPath>
+      <itemPath>main_prueba_uart.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -744,7 +751,7 @@
         <property key="programoptions.uselvpprogramming" value="false"/>
         <property key="voltagevalue" value="3.25"/>
       </Tool>
-      <item path="UART1simple.c" ex="true" overriding="false">
+      <item path="UART1simple.c" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -760,7 +767,7 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="UART1simple.h" ex="true" overriding="false">
+      <item path="UART1simple.h" ex="false" overriding="false">
         <C32>
         </C32>
         <C32-AR>
@@ -776,25 +783,203 @@
         <C32Global>
         </C32Global>
       </item>
-      <item path="buttons.c" ex="true" overriding="false">
+      <item path="buttons.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="buttons.h" ex="true" overriding="false">
+      <item path="buttons.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="buzzer.c" ex="true" overriding="false">
+      <item path="buzzer.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="buzzer.h" ex="true" overriding="false">
+      <item path="buzzer.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="fsm.c" ex="true" overriding="false">
+      <item path="fsm.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="fsm.h" ex="true" overriding="false">
+      <item path="fsm.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="game.h" ex="true" overriding="false">
+      <item path="game.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="leds.c" ex="true" overriding="false">
+      <item path="game.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
-      <item path="leds.h" ex="true" overriding="false">
+      <item path="leds.c" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="leds.h" ex="false" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
       <item path="main1.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="main_leds_prueba.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
+      </item>
+      <item path="main_ledspuls_prueba.c" ex="true" overriding="false">
+      </item>
+      <item path="main_prueba_uart.c" ex="true" overriding="false">
+      </item>
+      <item path="main_puls_prueba.c" ex="true" overriding="false">
         <C32>
         </C32>
         <C32-AR>
