@@ -12,12 +12,14 @@
         </group>
         <group>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/leds.c</file>
-            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/fsm.h</file>
+            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/buzzer.h</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/timers.c</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/main_prueba_fsm_uart_game.c</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/game.c</file>
+            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/UART1simple.c</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/buzzer.c</file>
-            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/leds.h</file>
+            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/main_prueba_juegobasico.c</file>
+            <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/dificultad.c</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/fsm.c</file>
             <file>file:/C:/Users/anara/OneDrive%20-%20Universidad%20Pontificia%20Comillas/Escritorio/ICAI/CURSO%202025-2026/2%20SEMESTRE/MICROPROCESADORES/PROYECTO%20FINAL/PracticaFinal.X/buttons.c</file>
         </group>

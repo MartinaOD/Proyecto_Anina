@@ -12,6 +12,7 @@
       <itemPath>game.h</itemPath>
       <itemPath>buttons.h</itemPath>
       <itemPath>timers.h</itemPath>
+      <itemPath>dificultad.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -41,6 +42,7 @@
       <itemPath>main_prueba_uart.c</itemPath>
       <itemPath>main_prueba_buzzer_ledspuls.c</itemPath>
       <itemPath>main_prueba_juegobasico.c</itemPath>
+      <itemPath>dificultad.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -994,8 +996,36 @@
         </C32Global>
       </item>
       <item path="main_prueba_buzzer_ledspuls.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
       <item path="main_prueba_fsm_uart_game.c" ex="true" overriding="false">
+        <C32>
+        </C32>
+        <C32-AR>
+        </C32-AR>
+        <C32-AS>
+        </C32-AS>
+        <C32-CO>
+        </C32-CO>
+        <C32-LD>
+        </C32-LD>
+        <C32CPP>
+        </C32CPP>
+        <C32Global>
+        </C32Global>
       </item>
       <item path="main_prueba_uart.c" ex="true" overriding="false">
         <C32>

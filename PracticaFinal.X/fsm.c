@@ -5,9 +5,11 @@
 #include "timers.h"
 #include "game.h"
 #include "UART1simple.h"
+#include "dificultad.h"
 
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
 /* =========================
  * Estados principales
@@ -17,6 +19,7 @@ typedef enum {
     STATE_INIT_GAME,
     STATE_SHOW_SEQUENCE,
     STATE_WAIT_INPUT,
+    STATE_ROUND_TRANSITION,
     STATE_GAME_OVER
 } fsm_state_t;
 
@@ -34,16 +37,15 @@ typedef enum {
 typedef enum {
     TIMER_NONE,
     TIMER_SHOW_SEQUENCE,
-    TIMER_INPUT_FEEDBACK
+    TIMER_INPUT_FEEDBACK,
+    TIMER_ROUND_PAUSE
 } timer_owner_t;
 
 /* =========================
  * Configuración
  * ========================= */
-#define MAX_SEQUENCE_LEN        10
-#define LED_ON_TICKS           300
-#define LED_OFF_TICKS          200
-#define INPUT_FEEDBACK_TICKS   150   // Feedback al pulsar botones
+#define MAX_SEQUENCE_LEN 10
+#define ERROR_SOUND_TICKS 1000   // 1 segundo
 
 /* =========================
  * Variables FSM
@@ -63,6 +65,8 @@ static led_color_t current_color;
 static bool timer_running = false;
 static bool game_over_msg_sent = false;
 static bool input_feedback_active = false;
+static bool last_input_correct = false;
+static bool error_sound_active = false;
 
 /* Control flanco botones */
 static button_t last_button = BUTTON_NONE;
@@ -85,23 +89,6 @@ static bool button_to_color(button_t button, led_color_t *color) {
 }
 
 /* =========================
- * UART: imprimir color
- * ========================= */
-static void uart_print_color(led_color_t color) {
-    switch (color) {
-        case RED: putsUART("ROJO ");
-            break;
-        case GREEN: putsUART("VERDE ");
-            break;
-        case BLUE: putsUART("AZUL ");
-            break;
-        case YELLOW: putsUART("AMARILLO ");
-            break;
-        default: break;
-    }
-}
-
-/* =========================
  * Inicialización FSM
  * ========================= */
 void FSM_init(void) {
@@ -110,17 +97,19 @@ void FSM_init(void) {
     sequence_length = 0;
     seq_index = 0;
     input_index = 0;
+    error_sound_active = false;
 
     timer_running = false;
     timer_owner = TIMER_NONE;
     game_over_msg_sent = false;
     input_feedback_active = false;
+    last_input_correct = false;
     last_button = BUTTON_NONE;
 
     LED_all_off();
     Buzzer_off();
 
-    putsUART("\r\nSistema listo. Pulse START\r\n");
+    putsUART("\nSistema listo\n");
 }
 
 /* =========================
@@ -133,11 +122,10 @@ void FSM_run(void) {
 
     switch (current_state) {
             /* =========================
-             * ESTADO IDLE
+             * IDLE
              * ========================= */
         case STATE_IDLE:
             if (new_press && button == BUTTON_START) {
-                srand(Timer1_getTicks()); // o TMR1
                 current_state = STATE_INIT_GAME;
             }
             break;
@@ -157,12 +145,9 @@ void FSM_run(void) {
             timer_owner = TIMER_NONE;
             game_over_msg_sent = false;
             input_feedback_active = false;
+            last_input_correct = false;
 
-            putsUART("\r\nComienza el juego\r\n");
-            putsUART("Secuencia inicial: ");
-            uart_print_color(sequence[0]);
-            putsUART("\r\n");
-
+            putsUART("\nInicio\n");
             current_state = STATE_SHOW_SEQUENCE;
             break;
 
@@ -173,32 +158,29 @@ void FSM_run(void) {
 
             if (show_substate == SHOW_LED_ON) {
                 if (!timer_running) {
-                    /* 🔴 Mostrar color: LED + BUZZER */
                     LED_on(sequence[seq_index]);
                     Buzzer_on(sequence[seq_index]);
 
-                    timer_start(LED_ON_TICKS);
+                    timer_start(dificultad_get_led_on_ticks());
                     timer_owner = TIMER_SHOW_SEQUENCE;
                     timer_running = true;
                 }
 
-                /* Tiempo de LED encendido agotado */
                 if (timer_owner == TIMER_SHOW_SEQUENCE && timer_expired()) {
                     LED_off(sequence[seq_index]);
                     Buzzer_off();
 
-                    timer_start(LED_OFF_TICKS);
+                    timer_start(dificultad_get_led_off_ticks());
                     timer_running = false;
                     show_substate = SHOW_LED_OFF;
                 }
             } else if (show_substate == SHOW_LED_OFF) {
-                /* Tiempo de pausa entre colores agotado */
                 if (timer_owner == TIMER_SHOW_SEQUENCE && timer_expired()) {
                     seq_index++;
 
                     if (seq_index >= sequence_length) {
                         seq_index = 0;
-                        putsUART("Introduzca secuencia:\r\n");
+                        putsUART("\nTu turno\n");
                         current_state = STATE_WAIT_INPUT;
                     } else {
                         show_substate = SHOW_LED_ON;
@@ -212,7 +194,7 @@ void FSM_run(void) {
              * ========================= */
         case STATE_WAIT_INPUT:
 
-            /* Apagar feedback visual/sonoro tras el tiempo */
+            /* Fin del feedback del botón */
             if (input_feedback_active &&
                     timer_owner == TIMER_INPUT_FEEDBACK &&
                     timer_expired()) {
@@ -220,51 +202,40 @@ void FSM_run(void) {
                 Buzzer_off();
                 input_feedback_active = false;
                 timer_owner = TIMER_NONE;
+
+                /* ✅ Si era el último botón correcto → transición */
+                if (last_input_correct) {
+                    last_input_correct = false;
+
+                    if (sequence_length < MAX_SEQUENCE_LEN) {
+                        sequence[sequence_length] = get_random_color();
+                        sequence_length++;
+                    }
+
+                    timer_start(dificultad_get_led_off_ticks());
+                    timer_owner = TIMER_ROUND_PAUSE;
+                    current_state = STATE_ROUND_TRANSITION;
+                }
             }
 
-            /* Nueva pulsación del usuario */
+            /* Nueva pulsación */
             if (new_press && button_to_color(button, &current_color)) {
-                /* Mostrar pulsación por UART */
-                putsUART("Pulsado: ");
-                uart_print_color(current_color);
-                putsUART("\r\n");
-
-                /* 🔊 FEEDBACK: LED + BUZZER según el color pulsado */
                 LED_on(current_color);
                 Buzzer_on(current_color);
 
-                timer_start(INPUT_FEEDBACK_TICKS);
+                timer_start(dificultad_get_input_feedback_ticks());
                 timer_owner = TIMER_INPUT_FEEDBACK;
                 input_feedback_active = true;
 
-                /* Comprobación de la secuencia */
                 if (current_color == sequence[input_index]) {
                     input_index++;
 
                     if (input_index >= sequence_length) {
-                        /* Ronda superada */
+                        /* Último botón correcto */
                         input_index = 0;
-                        seq_index = 0;
-
-                        if (sequence_length < MAX_SEQUENCE_LEN) {
-                            sequence[sequence_length] = get_random_color();
-                            sequence_length++;
-                        }
-
-                        putsUART("Nueva secuencia: ");
-                        for (uint8_t i = 0; i < sequence_length; i++) {
-                            uart_print_color(sequence[i]);
-                        }
-                        putsUART("\r\n");
-
-                        show_substate = SHOW_LED_ON;
-                        timer_running = false;
-                        timer_owner = TIMER_NONE;
-                        input_feedback_active = false;
-                        current_state = STATE_SHOW_SEQUENCE;
+                        last_input_correct = true;
                     }
                 } else {
-                    /* Error → fin del juego */
                     LED_all_off();
                     Buzzer_off();
                     input_feedback_active = false;
@@ -274,6 +245,21 @@ void FSM_run(void) {
             }
             break;
 
+            /* =========================
+             * TRANSICIÓN ENTRE RONDAS
+             * ========================= */
+        case STATE_ROUND_TRANSITION:
+
+            LED_all_off();
+            Buzzer_off();
+
+            if (timer_owner == TIMER_ROUND_PAUSE && timer_expired()) {
+                seq_index = 0;
+                show_substate = SHOW_LED_ON;
+                timer_owner = TIMER_NONE;
+                current_state = STATE_SHOW_SEQUENCE;
+            }
+            break;
 
             /* =========================
              * FIN DEL JUEGO
@@ -281,22 +267,36 @@ void FSM_run(void) {
         case STATE_GAME_OVER:
 
             LED_all_off();
-            Buzzer_off();
 
-            if (!game_over_msg_sent) {
-                putsUART("\r\nError. Fin del juego\r\n");
-                putsUART("Pulse START para reiniciar\r\n");
-                game_over_msg_sent = true;
+            /* Iniciar sonido de error una sola vez */
+            if (!error_sound_active) {
+                Buzzer_error_on(); // 🔊 sonido grave
+                timer_start(ERROR_SOUND_TICKS); // 1 segundo
+                timer_owner = TIMER_ROUND_PAUSE;
+                error_sound_active = true;
             }
 
+            /* Apagar sonido tras 1 segundo */
+            if (error_sound_active &&
+                    timer_owner == TIMER_ROUND_PAUSE &&
+                    timer_expired()) {
+                Buzzer_off();
+
+                if (!game_over_msg_sent) {
+                    putsUART("\nERROR\n");
+                    putsUART("\nSTART\n");
+                    game_over_msg_sent = true;
+                }
+            }
+
+            /* Esperar START para reiniciar */
             if (new_press && button == BUTTON_START) {
                 game_over_msg_sent = false;
+                error_sound_active = false;
+                timer_owner = TIMER_NONE;
                 current_state = STATE_INIT_GAME;
             }
-            break;
 
-        default:
-            current_state = STATE_IDLE;
             break;
     }
 }

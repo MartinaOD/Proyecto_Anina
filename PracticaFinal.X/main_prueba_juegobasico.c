@@ -8,6 +8,7 @@
 #include "timers.h"
 #include "fsm.h"
 #include "game.h"
+#include "dificultad.h"
 
 #include <stdlib.h>
 
@@ -24,6 +25,29 @@ int main(void)
     asm("ei");
     /* UART (monitorización FSM) */
     InicializarUART1(9600);
+
+    putsUART("\r\nSeleccione dificultad (1-3):\r\n");
+
+    char c;
+
+    // Bloque hasta que el usuario me pase algo:
+    c = getcUART();
+
+    while(c == '\0'){
+        c = getcUART();
+    }
+
+    // Salgo del while una vez el usuario haya introducido un valor
+
+    if (c < '1' || c > '3'){
+        // En caso de ser un valor incorrecto, configuro la velocidad normal:
+        c = '2';
+    }
+
+    dificultad_configurar(c);
+
+    putsUART("Dificultad configurada\r\n");
+
 
     /* Drivers */
     initLEDs();

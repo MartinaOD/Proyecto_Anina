@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c
+SOURCEFILES_QUOTED_IF_SPACED=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c dificultad.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Pic32Ini.o.d ${OBJECTDIR}/UART1simple.o.d ${OBJECTDIR}/buzzer.o.d ${OBJECTDIR}/leds.o.d ${OBJECTDIR}/fsm.o.d ${OBJECTDIR}/game.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/main_prueba_juegobasico.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o ${OBJECTDIR}/dificultad.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Pic32Ini.o.d ${OBJECTDIR}/UART1simple.o.d ${OBJECTDIR}/buzzer.o.d ${OBJECTDIR}/leds.o.d ${OBJECTDIR}/fsm.o.d ${OBJECTDIR}/game.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/main_prueba_juegobasico.o.d ${OBJECTDIR}/dificultad.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o
+OBJECTFILES=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o ${OBJECTDIR}/dificultad.o
 
 # Source Files
-SOURCEFILES=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c
+SOURCEFILES=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c dificultad.c
 
 
 
@@ -155,6 +155,12 @@ ${OBJECTDIR}/main_prueba_juegobasico.o: main_prueba_juegobasico.c  .generated_fi
 	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_juegobasico.o.d" -o ${OBJECTDIR}/main_prueba_juegobasico.o main_prueba_juegobasico.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/dificultad.o: dificultad.c  .generated_files/flags/default/460dda59d8d650a168dbd2eb4eb24d9dcaf2bd09 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/dificultad.o.d 
+	@${RM} ${OBJECTDIR}/dificultad.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/dificultad.o.d" -o ${OBJECTDIR}/dificultad.o dificultad.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/Pic32Ini.o: Pic32Ini.c  .generated_files/flags/default/e0c80a6299768cacbcc2389b015a35b6f262dbc2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -209,6 +215,12 @@ ${OBJECTDIR}/main_prueba_juegobasico.o: main_prueba_juegobasico.c  .generated_fi
 	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o.d 
 	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_juegobasico.o.d" -o ${OBJECTDIR}/main_prueba_juegobasico.o main_prueba_juegobasico.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/dificultad.o: dificultad.c  .generated_files/flags/default/7cbc7e2704164ed2034fa604f6a191ede0a3ae48 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/dificultad.o.d 
+	@${RM} ${OBJECTDIR}/dificultad.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/dificultad.o.d" -o ${OBJECTDIR}/dificultad.o dificultad.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 

@@ -66,3 +66,15 @@ void Buzzer_off(void)
     OC1CONbits.ON = 0;         // 🔴 apagar OC1
     OC1RS = 0;
 }
+
+/* =========================
+ * Frec error
+ * ========================= */
+void Buzzer_error_on(void)
+{
+    uint32_t frequency = 200; // sonido grave de error
+
+    PR2 = (PBCLK / (frequency * PRESCALER)) - 1;
+    OC1RS = PR2 / 2;
+    OC1CONbits.ON = 1;
+}
