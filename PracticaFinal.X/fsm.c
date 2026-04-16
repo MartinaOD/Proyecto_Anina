@@ -172,8 +172,8 @@ void FSM_run(void) {
         case STATE_SHOW_SEQUENCE:
 
             if (show_substate == SHOW_LED_ON) {
-
                 if (!timer_running) {
+                    /* 🔴 Mostrar color: LED + BUZZER */
                     LED_on(sequence[seq_index]);
                     Buzzer_on(sequence[seq_index]);
 
@@ -182,6 +182,7 @@ void FSM_run(void) {
                     timer_running = true;
                 }
 
+                /* Tiempo de LED encendido agotado */
                 if (timer_owner == TIMER_SHOW_SEQUENCE && timer_expired()) {
                     LED_off(sequence[seq_index]);
                     Buzzer_off();
@@ -191,7 +192,7 @@ void FSM_run(void) {
                     show_substate = SHOW_LED_OFF;
                 }
             } else if (show_substate == SHOW_LED_OFF) {
-
+                /* Tiempo de pausa entre colores agotado */
                 if (timer_owner == TIMER_SHOW_SEQUENCE && timer_expired()) {
                     seq_index++;
 
@@ -211,36 +212,36 @@ void FSM_run(void) {
              * ========================= */
         case STATE_WAIT_INPUT:
 
-            /* Apagar feedback tras tiempo */
+            /* Apagar feedback visual/sonoro tras el tiempo */
             if (input_feedback_active &&
                     timer_owner == TIMER_INPUT_FEEDBACK &&
                     timer_expired()) {
-
                 LED_off(current_color);
                 Buzzer_off();
                 input_feedback_active = false;
                 timer_owner = TIMER_NONE;
             }
 
-            /* Nueva pulsación */
+            /* Nueva pulsación del usuario */
             if (new_press && button_to_color(button, &current_color)) {
-
+                /* Mostrar pulsación por UART */
                 putsUART("Pulsado: ");
                 uart_print_color(current_color);
                 putsUART("\r\n");
 
+                /* 🔊 FEEDBACK: LED + BUZZER según el color pulsado */
                 LED_on(current_color);
                 Buzzer_on(current_color);
+
                 timer_start(INPUT_FEEDBACK_TICKS);
                 timer_owner = TIMER_INPUT_FEEDBACK;
                 input_feedback_active = true;
 
+                /* Comprobación de la secuencia */
                 if (current_color == sequence[input_index]) {
-
                     input_index++;
 
                     if (input_index >= sequence_length) {
-
                         /* Ronda superada */
                         input_index = 0;
                         seq_index = 0;
@@ -262,8 +263,8 @@ void FSM_run(void) {
                         input_feedback_active = false;
                         current_state = STATE_SHOW_SEQUENCE;
                     }
-
                 } else {
+                    /* Error → fin del juego */
                     LED_all_off();
                     Buzzer_off();
                     input_feedback_active = false;
@@ -272,6 +273,7 @@ void FSM_run(void) {
                 }
             }
             break;
+
 
             /* =========================
              * FIN DEL JUEGO

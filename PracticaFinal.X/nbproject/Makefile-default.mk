@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_fsm_uart_game.c
+SOURCEFILES_QUOTED_IF_SPACED=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_fsm_uart_game.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Pic32Ini.o.d ${OBJECTDIR}/UART1simple.o.d ${OBJECTDIR}/buzzer.o.d ${OBJECTDIR}/leds.o.d ${OBJECTDIR}/fsm.o.d ${OBJECTDIR}/game.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/main_prueba_fsm_uart_game.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Pic32Ini.o.d ${OBJECTDIR}/UART1simple.o.d ${OBJECTDIR}/buzzer.o.d ${OBJECTDIR}/leds.o.d ${OBJECTDIR}/fsm.o.d ${OBJECTDIR}/game.o.d ${OBJECTDIR}/buttons.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/main_prueba_juegobasico.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_fsm_uart_game.o
+OBJECTFILES=${OBJECTDIR}/Pic32Ini.o ${OBJECTDIR}/UART1simple.o ${OBJECTDIR}/buzzer.o ${OBJECTDIR}/leds.o ${OBJECTDIR}/fsm.o ${OBJECTDIR}/game.o ${OBJECTDIR}/buttons.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/main_prueba_juegobasico.o
 
 # Source Files
-SOURCEFILES=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_fsm_uart_game.c
+SOURCEFILES=Pic32Ini.c UART1simple.c buzzer.c leds.c fsm.c game.c buttons.c timers.c main_prueba_juegobasico.c
 
 
 
@@ -149,11 +149,11 @@ ${OBJECTDIR}/timers.o: timers.c  .generated_files/flags/default/dc74b9bb80dc7848
 	@${RM} ${OBJECTDIR}/timers.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/timers.o.d" -o ${OBJECTDIR}/timers.o timers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/main_prueba_fsm_uart_game.o: main_prueba_fsm_uart_game.c  .generated_files/flags/default/537f60f295ed801adada12507c872bd20bf180df .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/main_prueba_juegobasico.o: main_prueba_juegobasico.c  .generated_files/flags/default/9fe3adf768482d2896793f9d94acbcc794e74f8d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main_prueba_fsm_uart_game.o.d 
-	@${RM} ${OBJECTDIR}/main_prueba_fsm_uart_game.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_fsm_uart_game.o.d" -o ${OBJECTDIR}/main_prueba_fsm_uart_game.o main_prueba_fsm_uart_game.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o.d 
+	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_juegobasico.o.d" -o ${OBJECTDIR}/main_prueba_juegobasico.o main_prueba_juegobasico.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 else
 ${OBJECTDIR}/Pic32Ini.o: Pic32Ini.c  .generated_files/flags/default/e0c80a6299768cacbcc2389b015a35b6f262dbc2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
@@ -204,11 +204,11 @@ ${OBJECTDIR}/timers.o: timers.c  .generated_files/flags/default/ff5fac61c4ddcf8b
 	@${RM} ${OBJECTDIR}/timers.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/timers.o.d" -o ${OBJECTDIR}/timers.o timers.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/main_prueba_fsm_uart_game.o: main_prueba_fsm_uart_game.c  .generated_files/flags/default/3f2ca003d73eacc3d168c08d56c9c4b5321dae62 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/main_prueba_juegobasico.o: main_prueba_juegobasico.c  .generated_files/flags/default/50cd37d81f8b5cdbd97c2a3ca47392c2b7199e99 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/main_prueba_fsm_uart_game.o.d 
-	@${RM} ${OBJECTDIR}/main_prueba_fsm_uart_game.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_fsm_uart_game.o.d" -o ${OBJECTDIR}/main_prueba_fsm_uart_game.o main_prueba_fsm_uart_game.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o.d 
+	@${RM} ${OBJECTDIR}/main_prueba_juegobasico.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/main_prueba_juegobasico.o.d" -o ${OBJECTDIR}/main_prueba_juegobasico.o main_prueba_juegobasico.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 
