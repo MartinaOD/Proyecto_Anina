@@ -23,7 +23,7 @@ int main(void)
 
     INTCON |= 0x1000;
     asm("ei");
-    /* UART (monitorización FSM) */
+    /* UART  */
     InicializarUART1(9600);
 
     putsUART("\r\nSeleccione dificultad (1-3):\r\n");
@@ -39,10 +39,10 @@ int main(void)
 
     // Salgo del while una vez el usuario haya introducido un valor
 
-    if (c < '1' || c > '3'){
+    /*if (c < '1' || c > '3'){
         // En caso de ser un valor incorrecto, configuro la velocidad normal:
         c = '2';
-    }
+    }*/ //Ya en dificultad.c aunq posible doble seguro
 
     dificultad_configurar(c);
 
