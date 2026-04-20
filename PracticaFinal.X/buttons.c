@@ -1,7 +1,6 @@
 #include <xc.h>
 #include "buttons.h"
 
-/* PARA LA SESIÓN 1: buttons.c */
 
 #define PUL_ROJO 0 // RA0
 #define PUL_VERDE 1 // RA1
@@ -27,7 +26,7 @@ int ant_amarillo = 1;
 int ant_start = 1;
 
 
-// Dentro del while, se debe llamar a ButtonsPressed() y guardarla en button
+// Dentro del while o ejecución del juego, se debe llamar a ButtonsPressed() y guardarla en button
 
 button_t ButtonsPressed(){
     // Devolverá el tipo de botón según se detecte:
@@ -54,7 +53,7 @@ button_t ButtonsPressed(){
         return BUTTON_YELLOW;
     }
 
-    /* Actualizo estados*/
+    // Actualizo estados
 
     ant_rojo = act_rojo; 
     ant_verde = act_verde;
