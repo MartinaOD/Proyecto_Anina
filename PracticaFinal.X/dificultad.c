@@ -4,9 +4,6 @@
 #include "dificultad.h"
 #include "UART1simple.h"
 
-//game_speed_t game_speed;
-
-
 static uint16_t led_on_ticks;
 static uint16_t led_off_ticks;
 static uint16_t input_feedback_ticks;
