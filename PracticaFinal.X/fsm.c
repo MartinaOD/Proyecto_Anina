@@ -280,10 +280,11 @@ void FSM_run(void) {
             if (state_entry) {
                 LED_all_off();
                 Buzzer_error_on();
+                timer_start(ERROR_SOUND_TICKS);    // 1 segundo
                 putsUART("\r\nError. Fin del juego\r\n");
                 putsUART("Pulse START para reiniciar\r\n");
 
-                state_entry = false; // 👈 SOLO UNA VEZ
+                state_entry = false; // solo una vez
             }
 
             if (button == BUTTON_START) {
@@ -291,7 +292,7 @@ void FSM_run(void) {
                 state_entry = true;
             }
 
-            // Botones de color → IGNORADOS
+            // Botones de color -> IGNORADOS
             break;
     }
 }
