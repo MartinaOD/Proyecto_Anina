@@ -1,9 +1,6 @@
 #include "game.h"
 #include <stdlib.h>
 
-/*
- * Devuelve un color aleatorio del juego
- */
 led_color_t get_random_color(void)
 {
     uint8_t r = rand() % 4;
