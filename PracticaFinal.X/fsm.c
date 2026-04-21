@@ -277,22 +277,51 @@ void FSM_run(void) {
              * ========================= */
         case STATE_GAME_OVER:
 
-            if (state_entry) {
-                LED_all_off();
-                Buzzer_error_on();
-                timer_start(ERROR_SOUND_TICKS);    // 1 segundo
-                putsUART("\r\nError. Fin del juego\r\n");
-                putsUART("Pulse START para reiniciar\r\n");
+            /* Estado terminal pasivo: nada de LEDs ni feedback */
+            LED_all_off();
 
-                state_entry = false; // solo una vez
+            /* Iniciar sonido de error una sola vez */
+            if (!error_sound_active) {
+                /* Cancelar cualquier estado previo */
+                input_feedback_active = false;
+                last_input_correct = false;
+                timer_running = false;
+                timer_owner = TIMER_NONE;
+
+                /* Iniciar sonido grave temporizado */
+                Buzzer_error_on(); // sonido grave
+                timer_start(ERROR_SOUND_TICKS); // 1 segundo
+                timer_owner = TIMER_ROUND_PAUSE;
+                error_sound_active = true;
             }
 
-            if (button == BUTTON_START) {
+            /* Apagar sonido tras 1 segundo */
+            if (error_sound_active &&
+                    timer_owner == TIMER_ROUND_PAUSE &&
+                    timer_expired()) {
+                Buzzer_off();
+
+                /* Mostrar mensaje solo una vez */
+                if (!game_over_msg_sent) {
+                    putsUART("\nERROR\n");
+                    putsUART("\nSTART\n");
+                    game_over_msg_sent = true;
+                }
+            }
+
+            /* Ignorar TODOS los botones excepto START */
+            if (new_press && button == BUTTON_START) {
+                /* Reinicio limpio del sistema */
+                error_sound_active = false;
+                game_over_msg_sent = false;
+                timer_owner = TIMER_NONE;
+                timer_running = false;
+                input_feedback_active = false;
+                last_input_correct = false;
+
                 current_state = STATE_INIT_GAME;
-                state_entry = true;
             }
 
-            // Botones de color -> IGNORADOS
             break;
     }
 }
